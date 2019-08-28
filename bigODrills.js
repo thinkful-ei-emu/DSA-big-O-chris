@@ -97,13 +97,13 @@ function compute(num) {
       result.push(1); // O(1)
     }
     else { // O(1)
-      result.push(result[i - 2] + result[i - 3]); // O(n)
+      result.push(result[i - 2] + result[i - 3]); // O(1)
     }
   }
   return result; // O(1)
 }
 //          compute(4) -> result = [0, 1, 1, 2] it's the fibranacci sequence starting with 1
-//          O(n^2)
+//          O(n)
 
 
 // 8. An efficient search
@@ -161,3 +161,124 @@ function isWhat(n) {
 }
 // this tests  for if a number is prime or not
 // O(n) worst case, the function enters the for loop
+
+
+// Rod A	        Rod B	        Rod C
+// ----		
+// ---------		
+// -------------		
+// Output:
+
+// Rod A	        Rod B	        Rod C
+//                                 ----
+//                                 ---------
+//                                 -------------
+// The goal of the puzzle is to move the entire stack of rods 
+// to another rod (can't be the original rod where it was 
+// stacked before) where it will be stacked in the ascending 
+// order as well. This should be done obeying the following 
+// rules: i) Only one disk may be moved at a time ii) Each move 
+// consists of taking the upper disk from one of the rods and 
+// sliding it onto another rod, on top of the other disks that 
+// may already be present on that rod. iii) A larger disk may 
+// not placed on top of a smaller disk
+/*
+solution: A->C, A->B, C->B, A->C, B->A, B->C, A->C
+*/
+//imput a sorted arr
+//slice the front of the array and move it to one of two other arr
+//make it a rule that the new arr that it's moved to can't have a lower value there already
+//make a rule that the final stack can't be on the initial array
+
+function TOH(n, source, dest, temp){
+  if(n===1){
+    return `${source} -> ${dest}`;
+  }
+  return TOH(n-1, source, temp, dest) + ', ' 
+    + `${source} -> ${dest}` + ', ' 
+    + TOH(n-1, temp, dest, source); 
+}
+/*
+Rod A	        Rod B	        Rod C
+---------                       - 
+-------------                   --
+        		                -----
+		
+*/
+//3 disks: 7 moves, 4 disks: 15, 5 disks: 31
+//runtime: O(n)
+// console.log(TOH(5,'A','C','B'));
+
+// 1. Counting Sheep
+function countSheep(num){
+  for(let i=num; i>=0; i--){// O(n)
+    if(i<=0){// O(1)
+      console.log('All sheep jumped over the fence');// O(1)
+    } else{// O(1)
+      console.log(`${i}: Another sheep jumps over the fence`);// O(1)
+    }
+  }
+  return 'zzzzzz';// O(1)
+}
+// O(n)
+// countSheep(4);
+
+// 2. Power Calculator
+function powerCalculator(base, exponent){
+  return base ** exponent;// O(1)
+}
+// O(1)
+// console.log(powerCalculator(5,2));
+
+// 3. Reverse String
+function stringReverse(str){
+    return str.split('').reverse().join('');// O(n)
+}
+// O(n)
+// console.log(stringReverse('chris'))
+
+// 4. nth Triangular Number
+function triNum(num){
+    let result=0;// O(1)
+    for(let i=0; i<=num; i++){
+        result += i;
+    }
+    return result;
+}
+// O(n)
+// console.log(triNum(3));
+
+// 5. String Splitter
+function stringSplit(str){
+    return str.split('/').join('')
+}
+// O(n)
+// console.log(stringSplit('02/20/2020'))
+
+// 6. Fibonacci
+
+function fibonacci(num){
+    let result = [];
+    for(let i=0; i<num; i++){
+        if(i <= 1){
+            result[i] = 1
+        } else {
+            result[i] = result[i-1] + result[i-2];
+        }
+    }
+    return result[num-1];
+}
+// O(n)
+// console.log(fibonacci(7))
+
+// 7. Factorial
+function factorial(num){
+    let result=1;
+    for(let i=num; i>0; i--){
+        result *= i;
+    }
+    return result;
+}
+
+// O(n)
+// console.log(factorial(4))
